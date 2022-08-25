@@ -39,17 +39,25 @@ def compare(list_to_compare):
 #la siguiente función comparará los grupos previamente ordenados por cantidad de 1s
 def compare_groups(groups_to_compare):
     key_to_compare=1
-    quant_of_comparisons=len(groups_to_compare.keys())
+    quant_of_comparisons=list(groups_to_compare.keys()) #no se puede ir de 1 en 1 con la cantidad de ceros
+    #porque puede existir una expresión que no tenga 2 unos
+    print (quant_of_comparisons,"HERE")
     groups=[]
 
-    for i in range(1,quant_of_comparisons):
-        for keys in groups_to_compare[key_to_compare]:
+    for i in quant_of_comparisons:
+        for group in groups_to_compare[i]:
             #estamos recorriendo los de la cant de 1s
-            #print(keys)
-            for row in groups_to_compare[key_to_compare+1]:
-                consider= row[1:5]
-                print(consider)
-                 #llave 1 la comparamos con grupo de llave siguiente 
+            print(i,"group")
+            print(group)
+            
+            for row in groups_to_compare[quant_of_comparisons[i-1]]:
+                if i==quant_of_comparisons[0]:
+                    print("salto",i,quant_of_comparisons[0])
+                else:
+                    consider= row[1:5]
+                    print(consider,"row")
+                #print(set(row).difference(set(groups_to_compare[key_to_compare+2]))) #retorna la cantidad de diferencias entre los binarios
+                #llave 1 la comparamos con grupo de llave siguiente 
         print("group change")
         key_to_compare+=1
 
