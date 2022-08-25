@@ -50,13 +50,14 @@ def compare_groups(groups_to_compare):
             print(i,"group")
             actual_bin_position=group[1:5]
             
-            for row in groups_to_compare[quant_of_comparisons[i-1]]:
+            for row in groups_to_compare[i]:
                 diff_count=0
                 diff_position=None
                 consider_from_row=row[1:5]
-
-                if True:
-               
+                print('i',i,'group',group,'row',row)
+                if group==row:
+                    pass 
+                else:
                     for position in range(0,3):
                         if consider_from_row[position]!=actual_bin_position[position]:
                             diff_count+=1
@@ -82,6 +83,8 @@ def compare_groups(groups_to_compare):
         print("group change")
         key_to_compare+=1
         print(groups)
+
+        
     #con el fin de poder agrupar correctamente los términos que tienen diferencias 
     #es necesario crear una lista con listas, primera lista contiene los mintérminos, segunda lista contiene los binarios
     #segunda lista, tiene otra lista interna con los binarios separados ejm lista=[[[1,3],[1,0,0,1],[0,1,1,0]]]
@@ -89,4 +92,34 @@ def compare_groups(groups_to_compare):
 
     return 0
 
-compare_groups(compare(list_to_compare))
+def compare_groups2(groups_to_compare):
+    comparison_keys=list(groups_to_compare.keys())
+    print(comparison_keys)
+    groups=[]
+    
+    for position in range(0,len(comparison_keys)-1):
+        key=comparison_keys[position]
+        next_key=comparison_keys[position+1]
+        
+        for i in range(0,len(groups_to_compare[key])):
+            upper_comparison=groups_to_compare[key][i]
+            lower_comparison=groups_to_compare[next_key]
+
+
+
+            for j in range(0,len(groups_to_compare[next_key])):
+
+                lower_comparison=list(lower_comparison)
+
+                print(upper_comparison, lower_comparison[j])
+
+
+            diff_count=0
+            diff_position=None
+
+
+
+
+        
+
+compare_groups2(compare(list_to_compare))
