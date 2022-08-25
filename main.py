@@ -31,7 +31,7 @@ def compare(list_to_compare):
     
     print(sorted_dict)
 
-    return sorted_dict #recodar retirar el cero y enviar esta expresión al próximo paso del algoritmo
+    return sorted_dict 
 
 
 
