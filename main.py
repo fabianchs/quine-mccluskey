@@ -8,7 +8,8 @@ from collections import Counter
 list_to_compare= [[1,0,0,0,1],[3,0,0,1,1],[4,0,1,0,0],[5,0,1,0,1],[9,1,0,0,1],[11,1,0,1,1],[12,1,1,0,0],[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
 
 for value in list_to_compare:
-    print(value)
+    #print(value)
+    pass
 
 #función para agrupar en términos de 1's
 
@@ -33,16 +34,30 @@ def compare(list_to_compare):
     return sorted_dict #recodar retirar el cero y enviar esta expresión al próximo paso del algoritmo
 
 
-compare(list_to_compare)
+
 
 #la siguiente función comparará los grupos previamente ordenados por cantidad de 1s
 def compare_groups(groups_to_compare):
-
+    key_to_compare=1
+    quant_of_comparisons=len(groups_to_compare.keys())
     groups=[]
+
+    for i in range(1,quant_of_comparisons):
+        for keys in groups_to_compare[key_to_compare]:
+            #estamos recorriendo los de la cant de 1s
+            #print(keys)
+            for row in groups_to_compare[key_to_compare+1]:
+                consider= row[1:5]
+                print(consider)
+                 #llave 1 la comparamos con grupo de llave siguiente 
+        print("group change")
+        key_to_compare+=1
+
     #con el fin de poder agrupar correctamente los términos que tienen diferencias 
     #es necesario crear una lista con listas, primera lista contiene los mintérminos, segunda lista contiene los binarios
     #segunda lista, tiene otra lista interna con los binarios separados ejm lista=[[[1,3],[1,0,0,1],[0,1,1,0]]]
-    
+  
+
     return 0
 
-compare_groups(0)
+compare_groups(compare(list_to_compare))
