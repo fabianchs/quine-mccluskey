@@ -34,3 +34,6 @@ def compare(list_to_compare):
 
 
 compare(list_to_compare)
+
+def compare_groups(groups_to_compare):
+    return 0
