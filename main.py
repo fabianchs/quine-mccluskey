@@ -13,11 +13,11 @@ for value in list_to_compare:
 #función para agrupar en términos de 1's
 
 def compare(list_to_compare):
-    sorted_dict={}
+    sorted_dict={} #en el diccionario agruparemos por cantidad de 1's
 
-    for values in list_to_compare:
-        consider=values[1:5]
-        counter = Counter(consider)
+    for values in list_to_compare: 
+        consider=values[1:5] #el término cero es el valor del mintérmino, por eso se ignora 
+        counter = Counter(consider) #el counter nos indica la cantidad de ceros que hay en la lista
 
         if counter[1] not in sorted_dict:
             sorted_dict[counter[1]]=[values]
@@ -25,12 +25,12 @@ def compare(list_to_compare):
             new_list= sorted_dict[counter[1]]
             new_list.append(values)
             sorted_dict[counter[1]]=new_list
+        else:
+            print("Algún valor está fuera de índice o no es número") #esta validación nos permite observar en la terminal si el algoritmo no está siendo ejecutado correctamente
     
     print(sorted_dict)
 
-
-
-    return 0
+    return 0 #recodar retirar el cero y enviar esta expresión al próximo paso del algoritmo
 
 
 compare(list_to_compare)
