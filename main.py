@@ -110,8 +110,11 @@ def compare_groups2(groups_to_compare):
             for j in range(0,len(groups_to_compare[next_key])):
 
                 lower_comparison=list(lower_comparison)
-
                 print(upper_comparison, lower_comparison[j])
+
+                for k in range (1,5):
+                    print(upper_comparison[k],lower_comparison[j][k])
+
 
 
             diff_count=0
