@@ -100,11 +100,13 @@ def compare_groups2(groups_to_compare):
     for position in range(0,len(comparison_keys)-1):
         key=comparison_keys[position]
         next_key=comparison_keys[position+1]
+
+        diff_count=0
+        diff_position=None
         
         for i in range(0,len(groups_to_compare[key])):
             upper_comparison=groups_to_compare[key][i]
             lower_comparison=groups_to_compare[next_key]
-
 
 
             for j in range(0,len(groups_to_compare[next_key])):
@@ -113,12 +115,25 @@ def compare_groups2(groups_to_compare):
                 print(upper_comparison, lower_comparison[j])
 
                 for k in range (1,5):
-                    print(upper_comparison[k],lower_comparison[j][k])
+                    #print(upper_comparison[k],lower_comparison[j][k])
+
+                    if (upper_comparison[k])!=(lower_comparison[j][k]):
+                        print(upper_comparison[k],lower_comparison[j][k])
+                        diff_count=diff_count+1
+                        diff_position=k
+                    
+                if diff_count==1:
+                    insert=lower_comparison[j]
+                    insert[diff_position]='x'
+                    groups.append([[upper_comparison[0],lower_comparison[j][0]],insert]) 
+                    diff_count=0
+
+    print(groups)
 
 
 
-            diff_count=0
-            diff_position=None
+
+            
 
 
 
