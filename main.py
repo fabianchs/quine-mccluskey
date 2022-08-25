@@ -30,10 +30,19 @@ def compare(list_to_compare):
     
     print(sorted_dict)
 
-    return 0 #recodar retirar el cero y enviar esta expresión al próximo paso del algoritmo
+    return sorted_dict #recodar retirar el cero y enviar esta expresión al próximo paso del algoritmo
 
 
 compare(list_to_compare)
 
+#la siguiente función comparará los grupos previamente ordenados por cantidad de 1s
 def compare_groups(groups_to_compare):
+
+    groups=[]
+    #con el fin de poder agrupar correctamente los términos que tienen diferencias 
+    #es necesario crear una lista con listas, primera lista contiene los mintérminos, segunda lista contiene los binarios
+    #segunda lista, tiene otra lista interna con los binarios separados ejm lista=[[[1,3],[1,0,0,1],[0,1,1,0]]]
+    
     return 0
+
+compare_groups(0)
