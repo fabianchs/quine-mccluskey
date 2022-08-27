@@ -86,7 +86,7 @@ def compare_groups(groups_to_compare):
             for j in range(0,len(groups_to_compare[next_key])): #accedemos a cada lista en el value
 
                 lower_comparison=list(lower_comparison) 
-                print(upper_comparison, lower_comparison[j]) 
+                #print(upper_comparison, lower_comparison[j]) 
                 diff_count=0
                 for k in range (1,max_position): #accedemos a cada bit en la lista
                     #print(upper_comparison[k],lower_comparison[j][k])
@@ -101,8 +101,10 @@ def compare_groups(groups_to_compare):
                     groups.append([[upper_comparison[0],lower_comparison[j][0]],x_insert]) 
 
     for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
-        print(i)
-    print(groups)
-    comparesecondstep(groups)
+        pass
+        # print(i)
+    #print(groups)
 
-compare_groups(compare(list_to_compare))
+    return groups
+ 
+comparesecondstep(compare_groups(compare(list_to_compare))) 
