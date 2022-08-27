@@ -6,7 +6,7 @@ from collections import Counter
 #los mintérminos insertados son sumatoria de m(1,3,4,5,9,11,12,13,14,15)
 
 list_to_compare= [[1,0,0,0,1],[3,0,0,1,1],[4,0,1,0,0],[5,0,1,0,1],[9,1,0,0,1],[11,1,0,1,1],[12,1,1,0,0],[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
-
+list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
 for value in list_to_compare:
     #print(value)
     pass
@@ -17,7 +17,8 @@ def compare(list_to_compare):
     sorted_dict={} #en el diccionario agruparemos por cantidad de 1's
 
     for values in list_to_compare: 
-        consider=values[1:5] #el término cero es el valor del mintérmino, por eso se ignora 
+        max_position=len(list_to_compare[0])
+        consider=values[1:max_position] #el término cero es el valor del mintérmino, por eso se ignora 
         counter = Counter(consider) #el counter nos indica la cantidad de ceros que hay en la lista
 
         if counter[1] not in sorted_dict:
@@ -48,7 +49,7 @@ def compare(list_to_compare):
 def compare_groups2(groups_to_compare):
     comparison_keys=list(groups_to_compare.keys())
     groups=[]
-    
+    max_position=len(list_to_compare[0])
     for position in range(0,len(comparison_keys)-1):
 
         key=comparison_keys[position]
@@ -68,7 +69,7 @@ def compare_groups2(groups_to_compare):
                 lower_comparison=list(lower_comparison)
                 print(upper_comparison, lower_comparison[j])
                 diff_count=0
-                for k in range (1,5):
+                for k in range (1,max_position):
                     #print(upper_comparison[k],lower_comparison[j][k])
 
                     if (upper_comparison[k]) is not (lower_comparison[j][k]):
