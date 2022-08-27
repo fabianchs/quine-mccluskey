@@ -36,6 +36,28 @@ def compare(list_to_compare):
 
     return sorted_dict 
 
+def comparesecondstep(list_to_compare):#se requiere otra función para comparar en el segundo paso porque este requiere otro ciclo for
+    sorted_dict={} #en el diccionario agruparemos por cantidad de 1's
+    for group_position in list_to_compare:
+        for values in group_position: 
+
+            max_position=len(values)
+            consider=values[1:max_position] #el término cero es el valor del mintérmino, por eso se ignora
+            #max position se define según la cantidad de bits en la expresión, ya que estos cambian según lo insertado a la función
+            counter = Counter(consider) #el counter nos indica la cantidad de ceros que hay en la lista
+
+            if counter[1] not in sorted_dict: #si aún no existe la llave de la cantidad de 1s, se crea
+                sorted_dict[counter[1]]=[values]
+            elif counter[1] in sorted_dict: #si ya existe la llave en el diccionario, se accede al value y se le agrega a la lista el binario
+                new_list= sorted_dict[counter[1]]
+                new_list.append(values)
+                sorted_dict[counter[1]]=new_list
+            else:
+                print("Algún valor está fuera de índice o no es número") #esta validación nos permite observar en la terminal si el algoritmo no está siendo ejecutado correctamente
+    
+    print (sorted_dict)
+    return sorted_dict 
+
 #la siguiente función comparará los grupos previamente ordenados por cantidad de 1s
 
     #con el fin de poder agrupar correctamente los términos que tienen diferencias 
@@ -81,5 +103,6 @@ def compare_groups(groups_to_compare):
     for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
         print(i)
     print(groups)
+    comparesecondstep(groups)
 
 compare_groups(compare(list_to_compare))
