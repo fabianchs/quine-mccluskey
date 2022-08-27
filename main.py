@@ -7,7 +7,8 @@ from collections import Counter
 
 list_to_compare= [[1,0,0,0,1],[3,0,0,1,1],[4,0,1,0,0],[5,0,1,0,1],[9,1,0,0,1],[11,1,0,1,1],[12,1,1,0,0],[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
 list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
-for value in list_to_compare:
+
+for value in list_to_compare: #ciclo temporal para analizar comparaciones desde la terminal
     #print(value)
     pass
 
@@ -35,15 +36,13 @@ def compare(list_to_compare):
 
     return sorted_dict 
 
-
 #la siguiente función comparará los grupos previamente ordenados por cantidad de 1s
-
 
     #con el fin de poder agrupar correctamente los términos que tienen diferencias 
     #es necesario crear una lista con listas, primera lista contiene los mintérminos, segunda lista contiene los binarios
     #segunda lista, tiene otra lista interna con los binarios separados ejm lista=[[[1,3],[1,0,0,1],[0,1,1,0]]]
   
-def compare_groups2(groups_to_compare):
+def compare_groups(groups_to_compare):
     comparison_keys=list(groups_to_compare.keys()) #lista con todas las llaves existentes según cantidad de 1s
     #no se puede ciclar de 1 en 1 porque si no existe un grupo con 2 1s el ciclo se cae, es necesario tener explícitamente los grupos existentes
     groups=[]
@@ -79,9 +78,8 @@ def compare_groups2(groups_to_compare):
                     x_insert[diff_position]='x'
                     groups.append([[upper_comparison[0],lower_comparison[j][0]],x_insert]) 
 
-    print("gr to com",groups_to_compare)
-    for i in groups:
+    for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
         print(i)
     print(groups)
 
-compare_groups2(compare(list_to_compare))
+compare_groups(compare(list_to_compare))
