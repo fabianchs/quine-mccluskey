@@ -23,3 +23,8 @@ for i in minterms:
 
 
 
+
+# sprint 
+# retorne una lista de lista 
+# el n = 0 es el numero del mintermino 
+
