@@ -48,7 +48,7 @@ def comparesecondstep(list_to_compare_2):#se requiere otra función para compara
         counter = Counter(consider) #el counter nos indica la cantidad de ceros que hay en la lista
 
         if counter[1] not in sorted_dict: #si aún no existe la llave de la cantidad de 1s, se crea
-            sorted_dict[counter[1]]=[values]
+            sorted_dict[counter[1]]=[list_to_compare_2[i][0],values]
         elif counter[1] in sorted_dict: #si ya existe la llave en el diccionario, se accede al value y se le agrega a la lista el binario
             new_list= sorted_dict[counter[1]]
             new_list.append([list_to_compare_2[i][0],values])
