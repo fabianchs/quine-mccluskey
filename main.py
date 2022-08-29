@@ -56,7 +56,7 @@ def comparesecondstep(list_to_compare_2):#se requiere otra función para compara
         else:
             print("Algún valor está fuera de índice o no es número") #esta validación nos permite observar en la terminal si el algoritmo no está siendo ejecutado correctamente
     
-    print (sorted_dict,"here")
+   
     compare_recursive_groups(sorted_dict)
     return sorted_dict 
 
@@ -105,9 +105,8 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
  
 
 
-
+    print("\n")
     for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
-        pass
         print(i,"supposed to be")
    # print(groups)
 
@@ -135,7 +134,7 @@ def compare_groups(groups_to_compare):
             
             upper_comparison=groups_to_compare[key][i] #almacena el bit del mintérmino a analizar
             lower_comparison=groups_to_compare[next_key] #almacena el bit del siguiente mintérmino a analizar
-            print("upper",upper_comparison,"\n", "lower old",lower_comparison)
+            #print("upper",upper_comparison,"\n", "lower old",lower_comparison)
 
             for j in range(0,len(groups_to_compare[next_key])): #accedemos a cada lista en el value
 
