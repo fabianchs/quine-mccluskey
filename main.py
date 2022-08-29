@@ -48,7 +48,7 @@ def comparesecondstep(list_to_compare_2):#se requiere otra función para compara
         counter = Counter(consider) #el counter nos indica la cantidad de ceros que hay en la lista
 
         if counter[1] not in sorted_dict: #si aún no existe la llave de la cantidad de 1s, se crea
-            sorted_dict[counter[1]]=[list_to_compare_2[i][0],values]
+            sorted_dict[counter[1]]=[[list_to_compare_2[i][0],values]]
         elif counter[1] in sorted_dict: #si ya existe la llave en el diccionario, se accede al value y se le agrega a la lista el binario
             new_list= sorted_dict[counter[1]]
             new_list.append([list_to_compare_2[i][0],values])
@@ -57,8 +57,61 @@ def comparesecondstep(list_to_compare_2):#se requiere otra función para compara
             print("Algún valor está fuera de índice o no es número") #esta validación nos permite observar en la terminal si el algoritmo no está siendo ejecutado correctamente
     
     print (sorted_dict,"here")
+    compare_recursive_groups(sorted_dict)
     return sorted_dict 
 
+
+def compare_recursive_groups(groups_to_compare_2):#esta función está hecha para poder analizar todos los casos de grupos y se puede llamar recursivamente con la otra función
+
+    comparison_keys=list(groups_to_compare_2.keys()) #lista con todas las llaves existentes según cantidad de 1s
+
+    #no se puede ciclar de 1 en 1 porque si no existe un grupo con 2 1s el ciclo se cae, es necesario tener explícitamente los grupos existentes
+    groups=[]
+    max_position=len(list_to_compare[0]) #dado que la cantidad de bits cambia por cantidad de mintérminos, el programa debe ser responsivo y ciclar hasta la cantidad de bits existentes
+    for position in range(0,len(comparison_keys)-1): #accedemos a cada key
+
+        key=comparison_keys[position]
+        next_key=comparison_keys[position+1]
+
+        diff_count=0
+        diff_position=None
+
+        for i in range(0,len(groups_to_compare_2[key])-1): #accedemos a cada value
+            upper_comparison=groups_to_compare_2[key][i][1]
+            lower_comparison=[]
+            for j in range(0,len(groups_to_compare_2[next_key])-1):
+                lower_comparison.append(groups_to_compare_2[next_key][j][1])
+
+            for j in range(1,len(groups_to_compare_2[next_key])-1): #accedemos a cada lista en el value
+
+                lower_comparison=list(lower_comparison) 
+                #print(upper_comparison, lower_comparison[j]) 
+                diff_count=0
+                for k in range (1,max_position): #accedemos a cada bit en la lista
+                    if (upper_comparison[k]) is not (lower_comparison[j][k]): #compara si los bits son iguales o no
+                        diff_count+=1
+                        diff_position=k
+                    
+                if diff_count==1: #si solo existe una diferencia en la misma posición, se almacena con una X el valor y se agrega a la nueva lista
+                    x_insert=list(lower_comparison[j])
+                    x_insert[diff_position]='x'
+                    minterm_list=groups_to_compare_2[key][i][0]
+                    minterm_list.extend(groups_to_compare_2[next_key][j][0])
+                    minterm_list=list(set(minterm_list))
+
+                    
+                    groups.append([minterm_list,x_insert[1:max_position]]) 
+
+ 
+
+
+
+    for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
+        pass
+        print(i,"supposed to be")
+   # print(groups)
+
+    return groups
 #la siguiente función comparará los grupos previamente ordenados por cantidad de 1s
 
     #con el fin de poder agrupar correctamente los términos que tienen diferencias 
@@ -82,7 +135,7 @@ def compare_groups(groups_to_compare):
             
             upper_comparison=groups_to_compare[key][i] #almacena el bit del mintérmino a analizar
             lower_comparison=groups_to_compare[next_key] #almacena el bit del siguiente mintérmino a analizar
-
+            print("upper",upper_comparison,"\n", "lower old",lower_comparison)
 
             for j in range(0,len(groups_to_compare[next_key])): #accedemos a cada lista en el value
 
