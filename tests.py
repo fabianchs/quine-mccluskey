@@ -1,30 +1,25 @@
-def converter(list): #funcion para convertir los valores hexadecimales a binarios
+minterms=[0, 1, 2, 3, 4, 8, 10, 13, 14, 15, 17, 23, 24, 26, 27, 28, 31,32] # ejemplo
+def converse_bin(minterms):
+        
+    list_bin_str = []  # esta lista nos va a dar los binarios en str      
+    list_bin_int = []  # esta lista nos convierte list_bin_str en minteros
+    list_minterms = [] # Aqui lo agregamos a una matriz
     
+    for i in minterms:      
+        list_bin_str += (format(i, "b"))
+        list_bin_int = list(map(int, list_bin_str))
+        list_minterms.append(list_bin_int)
+        list_bin_str = [] #se debe limpiar esta variable
+        
+    add_minterms(list_minterms, minterms)
 
+def add_minterms(list_minterms, minterms): #funcion para agregar el mintermino a la matriz
     
+    for i in range(0, len(list_minterms)): 
+        n = 0 # condicion que me entra al while - bandera - true
+        while n < 1: 
+            n += 1  # condicion que me saca del while - bandera - false
+            list_minterms[i].insert(0,minterms[i])
+            
 
-
-
-    return list_to_compare #esta es la salida que resive la funcion "" 
-
-
-#Funcion para abrir y leer el archivo de texto
-
-#Con el comando "with" se utiliza para que el archivo se cierre una vez que se termina de utilizar el mismo.
-#Se abre el archivo como file para que a la hora de realizar 
-
-with open("list.txt") as mt:
-    minterms = mt.read().split(',')
-
-print(minterms)
-for i in minterms:
-    bin = format(int(i), "b")
-    print('El mintermino es: ', i,'Equivale a: ',bin)
-
-
-
-
-# sprint 
-# retorne una lista de lista 
-# el n = 0 es el numero del mintermino 
-
+    return list_minterms
