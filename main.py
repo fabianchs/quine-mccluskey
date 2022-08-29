@@ -51,7 +51,7 @@ def comparesecondstep(list_to_compare_2):#se requiere otra función para compara
             sorted_dict[counter[1]]=[values]
         elif counter[1] in sorted_dict: #si ya existe la llave en el diccionario, se accede al value y se le agrega a la lista el binario
             new_list= sorted_dict[counter[1]]
-            new_list.append(values)
+            new_list.append([list_to_compare_2[i][0],values])
             sorted_dict[counter[1]]=new_list
         else:
             print("Algún valor está fuera de índice o no es número") #esta validación nos permite observar en la terminal si el algoritmo no está siendo ejecutado correctamente
