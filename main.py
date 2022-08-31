@@ -106,9 +106,11 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
 
 
     print("\n")
+    
     for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
         print(i,"supposed to be")
    # print(groups)
+    ess_prime_implicant(groups)
 
     return groups
 #la siguiente función comparará los grupos previamente ordenados por cantidad de 1s
@@ -160,4 +162,28 @@ def compare_groups(groups_to_compare):
 
     return groups
  
+def ess_prime_implicant(reduced_list):
+
+    reduced_minterms=[]
+    
+    for reduced_expression in reduced_list:
+        reduced_minterms.extend(reduced_expression[0])
+    
+
+
+#créditos a stackoverflow por la siguiente función
+    def find_ess_prime_impl(reduced_minterms):
+        return [i for i in reduced_minterms if reduced_minterms.count(i) < 2]
+
+    ess_prime_implicants= find_ess_prime_impl(reduced_minterms)
+
+    reduced_minterms=list(set(reduced_minterms))
+
+
+    print(reduced_minterms)
+    print(ess_prime_implicants)
+
+
+
+
 comparesecondstep(compare_groups(compare(list_to_compare))) 
