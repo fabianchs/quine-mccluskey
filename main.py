@@ -6,7 +6,7 @@ from collections import Counter
 #los mintérminos insertados son sumatoria de m(1,3,4,5,9,11,12,13,14,15)
 
 list_to_compare= [[1,0,0,0,1],[3,0,0,1,1],[4,0,1,0,0],[5,0,1,0,1],[9,1,0,0,1],[11,1,0,1,1],[12,1,1,0,0],[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
-list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
+#list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
 
 for value in list_to_compare: #ciclo temporal para analizar comparaciones desde la terminal
     #print(value)
@@ -164,6 +164,8 @@ def compare_groups(groups_to_compare):
  
 def ess_prime_implicant(reduced_list):
 
+    abc='abcdefghijklmnopqrstuvwxyz'
+    print(reduced_list, "PRINT")
     reduced_minterms=[]
     
     for reduced_expression in reduced_list:
@@ -181,7 +183,25 @@ def ess_prime_implicant(reduced_list):
 
 
     print(reduced_minterms)
-    print(ess_prime_implicants)
+    print(ess_prime_implicants, "ess")
+
+    separate_exp=reduced_list
+    
+    for i in range(0,len(reduced_list)):
+        found_something=False
+        for j in ess_prime_implicants:
+            if j in reduced_list[0]:
+                found_something=True
+            if found_something:
+                separate_exp.pop(i)
+
+    unique_values = []
+    for expression in separate_exp:
+                if expression not in unique_values:
+                    unique_values.append(expression)
+
+    print(unique_values,"final?")
+
 
 
 
