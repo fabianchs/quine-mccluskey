@@ -178,7 +178,7 @@ def ess_prime_implicant(reduced_list):
         return [i for i in reduced_minterms if reduced_minterms.count(i) < 2]
 
     ess_prime_implicants= find_ess_prime_impl(reduced_minterms)
-
+    ess_prime_implicants.sort()
     reduced_minterms=list(set(reduced_minterms))
 
 
@@ -190,17 +190,20 @@ def ess_prime_implicant(reduced_list):
     for i in range(0,len(reduced_list)):
         found_something=False
         for j in ess_prime_implicants:
-            if j in reduced_list[0]:
+            if j in reduced_list[i]:
                 found_something=True
             if found_something:
-                separate_exp.pop(i)
-
+                separate_exp.remove(reduced_list[i])
+                break
+ 
     unique_values = []
     for expression in separate_exp:
                 if expression not in unique_values:
                     unique_values.append(expression)
 
+
     print(unique_values,"final?")
+
 
 
 
