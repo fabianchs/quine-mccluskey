@@ -102,7 +102,6 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
                     
                     groups.append([minterm_list,x_insert[1:max_position]]) 
 
- 
 
 
     print("\n")
@@ -171,22 +170,79 @@ def ess_prime_implicant(reduced_list):
     for reduced_expression in reduced_list:
         reduced_minterms.extend(reduced_expression[0])
     
-
+    print(reduced_minterms,"aquiiii")
 
 #créditos a stackoverflow por la siguiente función
     def find_ess_prime_impl(reduced_minterms):
-        return [i for i in reduced_minterms if reduced_minterms.count(i) < 2]
+        return [i for i in reduced_minterms if reduced_minterms.count(i) == 1]
 
     ess_prime_implicants= find_ess_prime_impl(reduced_minterms)
     ess_prime_implicants.sort()
+
     reduced_minterms=list(set(reduced_minterms))
 
 
     print(reduced_minterms)
     print(ess_prime_implicants, "ess")
 
-    separate_exp=reduced_list
-    
+    separate_exp=[]
+
+    list_of_values=[]
+
+    while len(ess_prime_implicants)>0:
+        found_something=False
+        list_of_minterms_to_remove= []
+
+        #abrir las expresiones
+        #comparar con los esenciales
+        #sacar los esenciales que ya están en la expresión
+        #guardar la expresión esencial
+
+        for expression in reduced_list:
+            for minterms in expression[0]:
+                if minterms in ess_prime_implicants:
+                    list_of_minterms_to_remove.append(minterms)
+                    found_something=True
+            if found_something:
+                list_of_values.append(expression)
+                for mintermm in list_of_minterms_to_remove:
+                    ess_prime_implicants.remove(mintermm)
+                list_of_minterms_to_remove=[]
+                found_something=False           
+
+        """
+        for expression in reduced_list:
+            for minterms in expression[0]:
+                if minterms in ess_prime_implicants:
+                    #ess_prime_implicants.remove(minterm)
+                    list_of_minterms_to_remove.append(minterms)
+                    list_of_values.append(expression)
+                    found_something=True
+                if found_something:
+                    list_of_values.append(expression)
+        if found_something==True:
+            for mintermm in list_of_minterms_to_remove:
+                print(list_of_values)
+                ess_prime_implicants.remove(mintermm)
+            found_something=False
+        """
+        """
+        for minterm in ess_prime_implicants:
+            for values in reduced_list:
+                for value in values[0]:
+                    if minterm==value:
+
+            if found_something:
+                list_of_values.append(values)
+        """
+
+
+        
+        print(ess_prime_implicants)
+        separate_exp=list_of_values
+
+
+    """
     for i in range(0,len(reduced_list)):
         found_something=False
         for j in ess_prime_implicants:
@@ -195,7 +251,7 @@ def ess_prime_implicant(reduced_list):
             if found_something:
                 separate_exp.remove(reduced_list[i])
                 break
- 
+    """
     unique_values = []
     for expression in separate_exp:
                 if expression not in unique_values:
