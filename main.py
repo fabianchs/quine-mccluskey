@@ -78,8 +78,9 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
 
         for i in range(0,len(groups_to_compare_2[key])-1): #accedemos a cada value
             upper_comparison=groups_to_compare_2[key][i][1]
+            
             lower_comparison=[]
-            for j in range(0,len(groups_to_compare_2[next_key])-1):
+            for j in range(0,len(groups_to_compare_2[next_key])):
                 lower_comparison.append(groups_to_compare_2[next_key][j][1])
 
             for j in range(1,len(groups_to_compare_2[next_key])-1): #accedemos a cada lista en el value
