@@ -7,7 +7,7 @@ from collections import Counter
 
 list_to_compare= [[1,0,0,0,1],[3,0,0,1,1],[4,0,1,0,0],[5,0,1,0,1],[9,1,0,0,1],[11,1,0,1,1],[12,1,1,0,0],[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
 #list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
-#list_to_compare=[[1,1,1,1,1]]
+list_to_compare=[[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
 #list_to_compare=[[28,1,1,1,0,0],[29,1,1,1,0,1],[30,1,1,1,1,0],[31,1,1,1,1,1]]
 for value in list_to_compare: #ciclo temporal para analizar comparaciones desde la terminal
     #print(value)
@@ -239,5 +239,21 @@ def ess_prime_implicant(reduced_list):
             str_exp=str_exp+str(exp[x])
 
     print(str_exp)
-
+    print(len(exp))
+    
 comparesecondstep(compare_groups(compare(list_to_compare))) 
+
+
+
+#print(first_func,"aaa")
+#print(comparesecondstep(list_to_compare))
+
+old_list=None
+new_list=None
+
+#old_list=compare_groups(compare(list_to_compare))
+
+while old_list!=new_list:
+    print("hi")
+
+
