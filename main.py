@@ -101,7 +101,6 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
                     minterm_list.extend(groups_to_compare_2[next_key][j][0])
                     minterm_list=list(set(minterm_list))
 
-                    
                     groups.append([minterm_list,x_insert[1:max_position]]) 
 
 

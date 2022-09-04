@@ -22,11 +22,6 @@ minterms=[[4,0,1,0,0],[23,1,0,1,1,0],[64,1,0,0,0,0,0,0]]
 
 print (minterms)
 
-for i in range(0, len(minterms)):
-            while len(minterms[i])<=literals:
-                        minterms[i].insert(1,0)
-            
-print(minterms)
 
 
 
