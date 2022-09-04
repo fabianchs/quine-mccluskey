@@ -109,8 +109,7 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
     print("\n")
     
     for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
-        print(i,"supposed to be")
-   # print(groups)
+        print(i,"supposed to be")git 
     ess_prime_implicant(groups)
 
     return groups
@@ -159,7 +158,6 @@ def compare_groups(groups_to_compare):
     for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
         pass
         print(i)
-   # print(groups)
 
     return groups
  
@@ -195,11 +193,6 @@ def ess_prime_implicant(reduced_list):
         found_something=False
         list_of_minterms_to_remove= []
 
-        #abrir las expresiones
-        #comparar con los esenciales
-        #sacar los esenciales que ya están en la expresión
-        #guardar la expresión esencial
-
         for expression in reduced_list:
             for minterms in expression[0]:
                 if minterms in ess_prime_implicants:
@@ -212,48 +205,10 @@ def ess_prime_implicant(reduced_list):
                 list_of_minterms_to_remove=[]
                 found_something=False           
 
-        """
-        for expression in reduced_list:
-            for minterms in expression[0]:
-                if minterms in ess_prime_implicants:
-                    #ess_prime_implicants.remove(minterm)
-                    list_of_minterms_to_remove.append(minterms)
-                    list_of_values.append(expression)
-                    found_something=True
-                if found_something:
-                    list_of_values.append(expression)
-        if found_something==True:
-            for mintermm in list_of_minterms_to_remove:
-                print(list_of_values)
-                ess_prime_implicants.remove(mintermm)
-            found_something=False
-        """
-        """
-        for minterm in ess_prime_implicants:
-            for values in reduced_list:
-                for value in values[0]:
-                    if minterm==value:
-
-            if found_something:
-                list_of_values.append(values)
-        """
-
-
-        
         print(ess_prime_implicants)
         separate_exp=list_of_values
 
 
-    """
-    for i in range(0,len(reduced_list)):
-        found_something=False
-        for j in ess_prime_implicants:
-            if j in reduced_list[i]:
-                found_something=True
-            if found_something:
-                separate_exp.remove(reduced_list[i])
-                break
-    """
     unique_values = []
     for expression in separate_exp:
                 if expression not in unique_values:
@@ -285,13 +240,5 @@ def ess_prime_implicant(reduced_list):
             str_exp=str_exp+str(exp[x])
 
     print(str_exp)
-    
-
-
-
-
-
-
-
 
 comparesecondstep(compare_groups(compare(list_to_compare))) 
