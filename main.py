@@ -63,14 +63,14 @@ def comparesecondstep(list_to_compare_2):#se requiere otra función para compara
 
 
 def compare_recursive_groups(groups_to_compare_2):#esta función está hecha para poder analizar todos los casos de grupos y se puede llamar recursivamente con la otra función
-
+ 
     comparison_keys=list(groups_to_compare_2.keys()) #lista con todas las llaves existentes según cantidad de 1s
 
     #no se puede ciclar de 1 en 1 porque si no existe un grupo con 2 1s el ciclo se cae, es necesario tener explícitamente los grupos existentes
     groups=[]
     max_position=len(list_to_compare[0]) #dado que la cantidad de bits cambia por cantidad de mintérminos, el programa debe ser responsivo y ciclar hasta la cantidad de bits existentes
     for position in range(0,len(comparison_keys)-1): #accedemos a cada key
-
+    
         key=comparison_keys[position]
         next_key=comparison_keys[position+1]
 
@@ -84,7 +84,7 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
             for j in range(0,len(groups_to_compare_2[next_key])):
                 lower_comparison.append(groups_to_compare_2[next_key][j][1])
 
-            for j in range(1,len(groups_to_compare_2[next_key])-1): #accedemos a cada lista en el value
+            for j in range(1,len(groups_to_compare_2[next_key])): #accedemos a cada lista en el value
 
                 lower_comparison=list(lower_comparison) 
                 #print(upper_comparison, lower_comparison[j]) 
@@ -109,7 +109,7 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
     print("\n")
     
     for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
-        print(i,"supposed to be")git 
+        print(i,"supposed to be")
     ess_prime_implicant(groups)
 
     return groups
