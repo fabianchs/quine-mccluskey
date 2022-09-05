@@ -6,9 +6,9 @@ from collections import Counter
 #los mintérminos insertados son sumatoria de m(1,3,4,5,9,11,12,13,14,15)
 
 #list_to_compare= [[1,0,0,0,1],[3,0,0,1,1],[4,0,1,0,0],[5,0,1,0,1],[9,1,0,0,1],[11,1,0,1,1],[12,1,1,0,0],[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
-#list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
+list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
 #list_to_compare=[[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
-list_to_compare=[[28,1,1,1,0,0],[29,1,1,1,0,1],[30,1,1,1,1,0],[31,1,1,1,1,1]]
+#list_to_compare=[[28,1,1,1,0,0],[29,1,1,1,0,1],[30,1,1,1,1,0],[31,1,1,1,1,1]]
 #list_to_compare=[[31,1,1,1,1,1]]
 
 list_of_iterations=[]
@@ -243,8 +243,7 @@ def ess_prime_implicant(reduced_list,condition):
             else:
                 str_exp=str_exp+str(exp[x])
 
-        print(str_exp)
-        print(len(exp))
+        return str_exp
     else:
         temporal_exp=""
         for expression in range(1,len(list_to_compare[0])):
@@ -253,16 +252,18 @@ def ess_prime_implicant(reduced_list,condition):
             elif (list_to_compare[0][expression])==0:
                 temporal_exp=temporal_exp+abc[expression-1]+"'"
         
-        print(temporal_exp)
+        return temporal_exp
 
 
 
 def resolve():
+    output=None
     if len(list_to_compare)==1:
-        ess_prime_implicant(list_to_compare, False)
+        output= ess_prime_implicant(list_to_compare, False)
+        
     else:
-        ess_prime_implicant(list_of_iterations[-2], True)
-    print("OSEA SI PASA","\n","SI PASAAA")
+        output=ess_prime_implicant(list_of_iterations[-2], True)
+    print("OSEA SI PASA","\n","SI PASAAA",output)
 
 #old_list=compare_groups(compare(list_to_compare))
 
@@ -300,9 +301,9 @@ if len(list_to_compare)>=2:
 else:
     resolve()
 
-resolve()
-
 for i in list_of_iterations:
     print("STAAART")
     print(i,"\n")
+
+resolve()
 
