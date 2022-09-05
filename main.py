@@ -8,7 +8,8 @@ from collections import Counter
 #list_to_compare= [[1,0,0,0,1],[3,0,0,1,1],[4,0,1,0,0],[5,0,1,0,1],[9,1,0,0,1],[11,1,0,1,1],[12,1,1,0,0],[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
 #list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
 #list_to_compare=[[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
-list_to_compare=[[31,1,1,1,1,1]]
+list_to_compare=[[28,1,1,1,0,0],[29,1,1,1,0,1],[30,1,1,1,1,0],[31,1,1,1,1,1]]
+#list_to_compare=[[31,1,1,1,1,1]]
 
 list_of_iterations=[]
 
@@ -112,7 +113,7 @@ def compare_recursive_groups(groups_to_compare_2):#esta función está hecha par
     
     for i in groups: #ciclo temporal para observar los mintérminos comparados en la terminal
         print(i,"supposed to be")
-    ess_prime_implicant(groups)
+
 
     return groups
 #la siguiente función comparará los grupos previamente ordenados por cantidad de 1s
@@ -163,89 +164,105 @@ def compare_groups(groups_to_compare):
 
     return groups
  
-def ess_prime_implicant(reduced_list):
+def ess_prime_implicant(reduced_list,condition):
 
     abc='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     print(reduced_list, "PRINT")
     reduced_minterms=[]
     
-    for reduced_expression in reduced_list:
-        reduced_minterms.extend(reduced_expression[0])
-    
-    print(reduced_minterms,"aquiiii")
+    if condition:
+        for reduced_expression in reduced_list:
+            reduced_minterms.extend(reduced_expression[0])
+        
+        print(reduced_minterms,"aquiiii")
 
-#créditos a stackoverflow por la siguiente función
-    def find_ess_prime_impl(reduced_minterms):
-        return [i for i in reduced_minterms if reduced_minterms.count(i) == 1]
+    #créditos a stackoverflow por la siguiente función
+        def find_ess_prime_impl(reduced_minterms):
+            return [i for i in reduced_minterms if reduced_minterms.count(i) == 1]
 
-    ess_prime_implicants= find_ess_prime_impl(reduced_minterms)
-    ess_prime_implicants.sort()
+        ess_prime_implicants= find_ess_prime_impl(reduced_minterms)
+        ess_prime_implicants.sort()
 
-    reduced_minterms=list(set(reduced_minterms))
-
-
-    print(reduced_minterms)
-    print(ess_prime_implicants, "ess")
-
-    separate_exp=[]
-
-    list_of_values=[]
-
-    while len(ess_prime_implicants)>0:
-        found_something=False
-        list_of_minterms_to_remove= []
-
-        for expression in reduced_list:
-            for minterms in expression[0]:
-                if minterms in ess_prime_implicants:
-                    list_of_minterms_to_remove.append(minterms)
-                    found_something=True
-            if found_something:
-                list_of_values.append(expression)
-                for mintermm in list_of_minterms_to_remove:
-                    ess_prime_implicants.remove(mintermm)
-                list_of_minterms_to_remove=[]
-                found_something=False           
-
-        print(ess_prime_implicants)
-        separate_exp=list_of_values
+        reduced_minterms=list(set(reduced_minterms))
 
 
-    unique_values = []
-    for expression in separate_exp:
-                if expression not in unique_values:
-                    unique_values.append(expression)
+        print(reduced_minterms)
+        print(ess_prime_implicants, "ess")
+
+        separate_exp=[]
+
+        list_of_values=[]
+
+        while len(ess_prime_implicants)>0:
+            found_something=False
+            list_of_minterms_to_remove= []
+
+            for expression in reduced_list:
+                for minterms in expression[0]:
+                    if minterms in ess_prime_implicants:
+                        list_of_minterms_to_remove.append(minterms)
+                        found_something=True
+                if found_something:
+                    list_of_values.append(expression)
+                    for mintermm in list_of_minterms_to_remove:
+                        ess_prime_implicants.remove(mintermm)
+                    list_of_minterms_to_remove=[]
+                    found_something=False           
+
+            print(ess_prime_implicants)
+            separate_exp=list_of_values
 
 
-    print(unique_values,"final?")
+        unique_values = []
+        for expression in separate_exp:
+                    if expression not in unique_values:
+                        unique_values.append(expression)
 
-    #siguiente ciclo para enviar la expresión
-    exp=[]
-    for expression in unique_values:
+
+        print(unique_values,"final?")
+
+        #siguiente ciclo para enviar la expresión
+        exp=[]
+        for expression in unique_values:
+            temporal_exp=""
+            for j in range(0,len(expression[1])):
+                if (expression[1][j])==1:
+                    temporal_exp=temporal_exp+abc[j]
+                elif (expression[1][j])==0:
+                    temporal_exp=temporal_exp+abc[j]+"'"
+
+            exp.append(temporal_exp)
+        
+        print(exp,"esta esss")
+
+        str_exp=""
+
+        for x in range(0,len(exp)):
+            if x>0:
+                str_exp=str_exp+"+"+str(exp[x])
+            else:
+                str_exp=str_exp+str(exp[x])
+
+        print(str_exp)
+        print(len(exp))
+    else:
         temporal_exp=""
-        for j in range(0,len(expression[1])):
-            if (expression[1][j])==1:
-                temporal_exp=temporal_exp+abc[j]
-            elif (expression[1][j])==0:
-                temporal_exp=temporal_exp+abc[j]+"'"
+        for expression in range(1,len(list_to_compare[0])):
+            if (list_to_compare[0][expression])==1:
+                    temporal_exp=temporal_exp+abc[expression-1]
+            elif (list_to_compare[0][expression])==0:
+                temporal_exp=temporal_exp+abc[expression-1]+"'"
+        
+        print(temporal_exp)
 
-        exp.append(temporal_exp)
-    
-    print(exp,"esta esss")
 
-    str_exp=""
-
-    for x in range(0,len(exp)):
-        if x>0:
-            str_exp=str_exp+"+"+str(exp[x])
-        else:
-            str_exp=str_exp+str(exp[x])
-
-    print(str_exp)
-    print(len(exp))
 
 def resolve():
-    print("hi")
+    if len(list_to_compare)==1:
+        ess_prime_implicant(list_to_compare, False)
+    else:
+        ess_prime_implicant(list_of_iterations[-2], True)
+    print("OSEA SI PASA","\n","SI PASAAA")
 
 #old_list=compare_groups(compare(list_to_compare))
 
@@ -273,14 +290,17 @@ if len(list_to_compare)>=2:
                 list_of_iterations.append(iterate)
             except:
                 print("Se ha alcanzado la cantidad máxima de iteraciones o la expresión no se puede recorrer")
+                resolve()
                 break
     else:
         list_of_iterations.pop()
+        resolve()
 
 
 else:
     resolve()
 
+resolve()
 
 for i in list_of_iterations:
     print("STAAART")
