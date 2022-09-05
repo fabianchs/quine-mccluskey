@@ -6,9 +6,9 @@ from collections import Counter
 #los mintérminos insertados son sumatoria de m(1,3,4,5,9,11,12,13,14,15)
 
 #list_to_compare= [[1,0,0,0,1],[3,0,0,1,1],[4,0,1,0,0],[5,0,1,0,1],[9,1,0,0,1],[11,1,0,1,1],[12,1,1,0,0],[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
-list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
+#list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,1,0,0],[8,0,1,0,0,0],[10,0,1,0,1,0],[13,0,1,1,0,1],[14,0,1,1,1,0],[15,0,1,1,1,1],[17,1,0,0,0,1],[23,1,0,1,1,1],[24,1,1,0,0,0],[26,1,1,0,1,0],[27,1,1,0,1,1],[28,1,1,1,0,0],[31,1,1,1,1,1]]
 #list_to_compare=[[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
-#list_to_compare=[[28,1,1,1,0,0],[29,1,1,1,0,1],[30,1,1,1,1,0],[31,1,1,1,1,1]]
+list_to_compare=[[31,1,1,1,1,1]]
 
 list_of_iterations=[]
 
@@ -243,36 +243,46 @@ def ess_prime_implicant(reduced_list):
 
     print(str_exp)
     print(len(exp))
-    
+
+def resolve():
+    print("hi")
 
 #old_list=compare_groups(compare(list_to_compare))
 
-first_iter=compare(list_to_compare)
-list_of_iterations.append(first_iter)
-first_iter= compare_groups(first_iter)
-list_of_iterations.append(first_iter)
+if len(list_to_compare)>=2:
 
-second_iter=comparesecondstep(list_of_iterations[1])
-list_of_iterations.append(second_iter)
-second_iter=compare_recursive_groups(second_iter)
-list_of_iterations.append(second_iter)
+    first_iter=compare(list_to_compare)
+    list_of_iterations.append(first_iter)
+    first_iter= compare_groups(first_iter)
+    list_of_iterations.append(first_iter)
+
+    second_iter=comparesecondstep(list_of_iterations[1])
+    list_of_iterations.append(second_iter)
+    second_iter=compare_recursive_groups(second_iter)
+    if second_iter!=[]:
+        list_of_iterations.append(second_iter)
+
+        while (list_of_iterations[-1]!=list_of_iterations[-3]) or (list_of_iterations[-1])!=[] :
+
+            try:
+                iterate=comparesecondstep(list_of_iterations[-1])
+                list_of_iterations.append(iterate)
+                iterate=compare_recursive_groups(list_of_iterations[-1])
+                if iterate==[] or iterate=={}:
+                    break
+                list_of_iterations.append(iterate)
+            except:
+                print("Se ha alcanzado la cantidad máxima de iteraciones o la expresión no se puede recorrer")
+                break
+    else:
+        list_of_iterations.pop()
 
 
-while (list_of_iterations[-1]!=list_of_iterations[-3]) or (list_of_iterations[-1])!=[]:
-
-    try:
-        iterate=comparesecondstep(list_of_iterations[-1])
-        list_of_iterations.append(iterate)
-        iterate=compare_recursive_groups(list_of_iterations[-1])
-        if iterate==[] or iterate=={}:
-            break
-        list_of_iterations.append(iterate)
-    except:
-        print("Se ha alcanzado la cantidad máxima de iteraciones o la expresión no se puede recorrer")
-        break
-
+else:
+    resolve()
 
 
 for i in list_of_iterations:
     print("STAAART")
     print(i,"\n")
+
