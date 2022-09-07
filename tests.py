@@ -1,5 +1,11 @@
-minterms=[0, 1, 2, 3, 4, 8, 10, 13, 14, 15, 17, 23, 24, 26, 27, 28, 31,32] # ejemplo
-literals=6
+
+from read_min import txt_minterms, txt_literals
+
+minterms=txt_minterms
+literals=txt_literals
+
+print(literals,"wtf")
+
 def converse_bin(minterms):
         
     list_bin_str = []  # esta lista nos va a dar los binarios en str      
@@ -29,11 +35,12 @@ def add_minterms(list_minterms, minterms): #funcion para agregar el mintermino a
 def add_zeros(bins):
 
     for i in range(0, len(bins)):
-            while len(bins[i])<=literals:
+            while len(bins[i])<=int(literals):
                         bins[i].insert(1,0)
     
     return bins
+
 print(minterms)
 
 
-print(add_zeros(converse_bin(minterms)))
+processed_minterms= add_zeros(converse_bin(minterms))

@@ -1,5 +1,7 @@
 
+
 from collections import Counter
+from tests import processed_minterms
 #Función que compara los valores repetidos
 
 #la siguiente lista es temporal, para efectos de comprobar el funcionamiento del algoritmo
@@ -10,6 +12,7 @@ list_to_compare=[[0,0,0,0,0,0],[1,0,0,0,0,1],[2,0,0,0,1,0],[3,0,0,0,1,1],[4,0,0,
 #list_to_compare=[[13,1,1,0,1],[14,1,1,1,0],[15,1,1,1,1]]
 #list_to_compare=[[28,1,1,1,0,0],[29,1,1,1,0,1],[30,1,1,1,1,0],[31,1,1,1,1,1]]
 #list_to_compare=[[31,1,1,1,1,1]]
+list_to_compare=processed_minterms
 
 list_of_iterations=[]
 
