@@ -1,10 +1,11 @@
-"""
+
 import numpy as np
 import pdflatex 
 from pylatex import Document, Section, Subsection, Tabular, Math, TikZ, Axis, \
     Plot, Figure, Matrix, Alignat
 from pylatex.utils import italic
 import os
+
 
 if __name__ == '__main__':
     image_filename = os.path.join(os.path.dirname(__file__), 'kitten.jpg')
@@ -67,4 +68,4 @@ if __name__ == '__main__':
                 kitten_pic.add_caption('Look it\'s on its back')
 
     doc.generate_pdf('full', clean_tex=False)
-    """
+   
