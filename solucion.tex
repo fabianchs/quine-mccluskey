@@ -1,0 +1,86 @@
+\documentclass{beamer}%
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\usepackage{lmodern}%
+\usepackage{textcomp}%
+\usepackage{lastpage}%
+\usepackage{geometry}%
+\geometry{tmargin=1cm,lmargin=1cm,margin=1cm}%
+\usepackage{hyperref}%
+%
+\title{Algoritmo Quine McCluskey}%
+\author{Fabián Chacón, Johanel Álvarez, William Sánchez}%
+\date{8 setiembre 2022}%
+%
+\begin{document}%
+\normalsize%
+\section{Titlepage}%
+\label{sec:Titlepage}%
+\maketitle
+
+%
+\section{Section}%
+\label{sec:Section}%
+\begin{itemize}%
+\item%
+ITERACIÓN: 1%
+\item%
+Cantidad de 1: 3%
+\item%
+{[}1, 1, 1, 0, 0{]}%
+\item%
+Cantidad de 1: 4%
+\item%
+{[}1, 1, 1, 0, 1{]}%
+\item%
+{[}1, 1, 1, 1, 0{]}%
+\item%
+Cantidad de 1: 5%
+\item%
+{[}1, 1, 1, 1, 1{]}%
+\newpage%
+\item%
+RELACIONES CON OTRAS EXPRESIONES%
+\item%
+{[}{[}28, 29, 30, 31{]}, {[}1, 1, 1, 0, 'x'{]}{]}%
+\item%
+{[}{[}28, 30{]}, {[}1, 1, 1, 'x', 0{]}{]}%
+\item%
+{[}{[}29, 31{]}, {[}1, 1, 1, 'x', 1{]}{]}%
+\item%
+{[}{[}30, 31{]}, {[}1, 1, 1, 1, 'x'{]}{]}%
+\newpage%
+\item%
+ITERACIÓN: 2%
+\item%
+Cantidad de 1: 3%
+\item%
+{[}1, 1, 1, 0, 'x'{]}%
+\item%
+{[}1, 1, 1, 'x', 0{]}%
+\item%
+Cantidad de 1: 4%
+\item%
+{[}1, 1, 1, 'x', 1{]}%
+\item%
+{[}1, 1, 1, 1, 'x'{]}%
+\newpage%
+\item%
+RELACIONES CON OTRAS EXPRESIONES%
+\item%
+{[}{[}28, 29, 30, 31{]}, {[}1, 1, 1, 'x', 'x'{]}{]}%
+\newpage%
+\end{itemize}
+
+%
+\section{Slide}%
+\label{sec:Slide}%
+\begin{itemize}%
+\item%
+La expresión final es:%
+\item%
+ABC%
+\end{itemize}
+
+%
+\end{document}

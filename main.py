@@ -266,7 +266,7 @@ def resolve():
         
     else:
         output=ess_prime_implicant(list_of_iterations[-2], True)
-    print("OSEA SI PASA","\n","SI PASAAA",output)
+    return output
 
 #old_list=compare_groups(compare(list_to_compare))
 
@@ -308,5 +308,12 @@ for i in list_of_iterations:
     print("STAAART")
     print(i,"\n")
 
-resolve()
+def return_iterations():
+    return list_of_iterations
+
+
+exp_output_pdf=resolve()
+iter_output_pdf=return_iterations()
+
+print(iter_output_pdf, "iter output")
 

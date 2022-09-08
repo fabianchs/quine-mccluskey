@@ -1,71 +1,104 @@
-
 import numpy as np
-import pdflatex 
-from pylatex import Document, Section, Subsection, Tabular, Math, TikZ, Axis, \
-    Plot, Figure, Matrix, Alignat
-from pylatex.utils import italic
+import os, glob
+from pylatex import Document, Section, Subsection, Tabular, Command
+from pylatex import Math, TikZ, Axis, Plot, Figure, Matrix, Alignat
+from main import exp_output_pdf, iter_output_pdf
+from pylatex import PageStyle, Head, Foot, MiniPage, \
+    StandAloneGraphic, MultiColumn, Tabu, LongTabu, LargeText, MediumText, \
+    LineBreak, NewPage, Tabularx, TextColor, simple_page_number, Itemize, Hyperref, Package
+from pylatex.utils import italic, bold, NoEscape, escape_latex
 import os
+import pandas as pd
+
+
+def hyperlink(url,text):
+    text = escape_latex(text)
+    return NoEscape(r'\href{' + url + '}{' + text + '}')
+
+event_info_dir = 'events_station_info'
+all_station_info_files = glob.glob(f"{event_info_dir}/*.txt")
+event_maps_dir = 'events_station_maps'
+
+iteration=0
+
+
 
 
 if __name__ == '__main__':
-    image_filename = os.path.join(os.path.dirname(__file__), 'kitten.jpg')
 
-    geometry_options = {"tmargin": "1cm", "lmargin": "1cm"}
-    doc = Document(geometry_options=geometry_options, documentclass="beamer")
+    geometry_options = {"tmargin": "1cm", "lmargin": "1cm", "margin": "1cm"}
+    doc = Document(geometry_options=geometry_options, 
+            documentclass="beamer",
+            )
+    doc.packages.append(Package('hyperref'))
+    
+    with doc.create(Section('Titlepage')):
+        doc.preamble.append(Command('title', 'Algoritmo Quine McCluskey'))
+        doc.preamble.append(Command('author', 'Fabián Chacón, Johanel Álvarez, William Sánchez'))
+        doc.preamble.append(Command('date', "8 setiembre 2022"))
+        doc.append(NoEscape(r'\maketitle'))
 
-    with doc.create(Section('The simple stuff')):
-        doc.append('Some regular text and some')
-        doc.append(italic('italic text. '))
-        doc.append('\nAlso some crazy characters: $&#{}')
-        with doc.create(Subsection('Math that is incorrect')):
-            doc.append(Math(data=['2*3', '=', 9]))
+    with doc.create(Section('Section')):
+        with doc.create(Itemize()) as itemize:
+            for i in range(0,len(iter_output_pdf)-1,2):
+                iteration+=1
+                itemize.add_item("ITERACIÓN: "+str(iteration))
+                for j in iter_output_pdf[i]:
+                    itemize.add_item("Cantidad de 1: "+str(j))
+                    for k in iter_output_pdf[i][j]:  
 
-        with doc.create(Subsection('Table of something')):
-            with doc.create(Tabular('rc|cl')) as table:
-                table.add_hline()
-                table.add_row((1, 2, 3, 4))
-                table.add_hline(1, 2)
-                table.add_empty_row()
-                table.add_row((4, 5, 6, 7))
+                        if iteration>=3:
+                            itemize.add_item(k[1])
+                        elif i>1:
+                            itemize.add_item(k[1][1:len(k[1])])
+                        else:
+                            itemize.add_item(k[1:len(k)])
 
-    a = np.array([[100, 10, 20]]).T
-    M = np.matrix([[2, 3, 4],
-                   [0, 0, 1],
-                   [0, 0, 2]])
+                doc.append(NewPage())
 
-    with doc.create(Section('The fancy stuff')):
-        with doc.create(Subsection('Correct matrix equations')):
-            doc.append(Math(data=[Matrix(M), Matrix(a), '=', Matrix(M * a)]))
+                itemize.add_item("RELACIONES CON OTRAS EXPRESIONES")
+                for l in iter_output_pdf[i+1]:
+                    if iteration==1:
+                        itemize.add_item([l[0],l[1][1:len(l[1])]])
+                    else:
+                        itemize.add_item(l)
 
-        with doc.create(Subsection('Alignat math environment')):
-            with doc.create(Alignat(numbering=False, escape=False)) as agn:
-                agn.append(r'\frac{a}{b} &= 0 \\')
-                agn.extend([Matrix(M), Matrix(a), '&=', Matrix(M * a)])
+                doc.append(NewPage())
 
-        with doc.create(Subsection('Beautiful graphs')):
-            with doc.create(TikZ()):
-                plot_options = 'height=4cm, width=6cm, grid=major'
-                with doc.create(Axis(options=plot_options)) as plot:
-                    plot.append(Plot(name='model', func='-x^5 - 242'))
 
-                    coordinates = [
-                        (-4.77778, 2027.60977),
-                        (-3.55556, 347.84069),
-                        (-2.33333, 22.58953),
-                        (-1.11111, -493.50066),
-                        (0.11111, 46.66082),
-                        (1.33333, -205.56286),
-                        (2.55556, -341.40638),
-                        (3.77778, -1169.24780),
-                        (5.00000, -3269.56775),
-                    ]
 
-                    plot.append(Plot(name='estimate', coordinates=coordinates))
+    with doc.create(Section('Slide')):
+        with doc.create(Itemize()) as itemize:
+            itemize.add_item("La expresión final es:")
+            itemize.add_item(exp_output_pdf)
 
-        with doc.create(Subsection('Cute kitten pictures')):
-            with doc.create(Figure(position='h!')) as kitten_pic:
-                kitten_pic.add_image(image_filename, width='120px')
-                kitten_pic.add_caption('Look it\'s on its back')
+    totstationslist = []
+    for ff in glob.glob(f"{event_maps_dir}/*.png"):
+        numstation = int(os.path.basename(ff).split('.png')[0].split("_")[-1])
+        totstationslist.append(numstation)
+    totstationsinds = np.argsort(totstationslist)
+    totstationsinds = totstationsinds[::-1] #reverse order
 
-    doc.generate_pdf('full', clean_tex=False)
-   
+    for ind in totstationsinds:
+        ff = all_station_info_files[ind]
+        dff_events = pd.read_csv(ff, nrows=1)
+        evname = dff_events.loc[0,'eventorig']
+        eventbrk = dff_events.loc[0,'eventbrk']
+        # print(evname)
+        station_map_file_list = glob.glob(f"{event_maps_dir}/*{evname}_*.png")
+        if len(station_map_file_list):
+            station_map_file = station_map_file_list[0]
+            print(station_map_file)
+            with doc.create(Section('Slide')):
+                with doc.create(Itemize()) as itemize:
+                    itemize.add_item(f"{evname}, Dep: {dff_events.loc[0,'eventdepth']}, Mag: {dff_events.loc[0,'eventmag']}")
+                with doc.create(Subsection('Figure')):
+                    with doc.create(Figure(position='h!')) as fig_map:
+                        fig_map.add_image(station_map_file, width='230px')
+                        fig_map.add_caption(f'Station Map for {evname}')
+
+                doc.append(NewPage())
+
+	# Creating a pdf
+    doc.generate_pdf('solucion', clean_tex=False, clean=True)
+
